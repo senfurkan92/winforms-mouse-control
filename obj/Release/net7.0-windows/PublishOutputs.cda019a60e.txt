@@ -1,0 +1,6 @@
+D:\_yazilim\winforms\WinFormsCursor\WinFormsCursor\bin\Release\net7.0-windows\publish\WinFormsCursor.exe
+D:\_yazilim\winforms\WinFormsCursor\WinFormsCursor\bin\Release\net7.0-windows\publish\WinFormsCursor.dll
+D:\_yazilim\winforms\WinFormsCursor\WinFormsCursor\bin\Release\net7.0-windows\publish\WinFormsCursor.deps.json
+D:\_yazilim\winforms\WinFormsCursor\WinFormsCursor\bin\Release\net7.0-windows\publish\WinFormsCursor.runtimeconfig.json
+D:\_yazilim\winforms\WinFormsCursor\WinFormsCursor\bin\Release\net7.0-windows\publish\WinFormsCursor.pdb
+D:\_yazilim\winforms\WinFormsCursor\WinFormsCursor\bin\Release\net7.0-windows\publish\Microsoft.Extensions.Logging.Abstractions.dll
