@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "zNXuUYakji5Oy4GPuwRM7a7/eg1hWBgn4ZS57N/c1WOdUqwITm53CDGt414bZBs/yZyvqitAAGKr5+dOe383ow==",
+  "success": true,
+  "projectFilePath": "D:\\_yazilim\\winforms\\WinFormsCursor\\WinFormsCursor\\WinFormsCursor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\furka\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.0\\microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
