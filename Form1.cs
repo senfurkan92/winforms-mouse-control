@@ -11,27 +11,29 @@ namespace WinFormsCursor
         private readonly Action _moveCursor;
         private bool isMoving = false;
         private bool needEscape = false;
+        private bool hesitating = false;
+        private MouseOperations mouseOps = new MouseOperations();
 
         public Form1()
         {
             _moveCursor = async () => {
-                var mouseOps = new MouseOperations();
-                Rectangle res = Screen.PrimaryScreen.Bounds;
-                var pos = new Point((Size.Width) / 2, (Size.Height) / 2);
-                var random = new Random();
-                var last = DateTime.Now;
-                var x = random.Next(0, 10) % 2 == 0 ? pos.X + random.Next(0, (Size.Width) / 3) : pos.X - random.Next(0, (Size.Width) / 3);
-                var y = random.Next(0, 10) % 2 == 0 ? pos.Y + random.Next(0, (Size.Height) / 3) : pos.Y - random.Next(0, (Size.Height) / 3);
-                Cursor.Position = new Point(x,y);
-                last = DateTime.Now;
-                await Task.Delay(500);
+                if (!hesitating)
+                {
+                    Rectangle res = Screen.PrimaryScreen.Bounds;
+                    var pos = new Point((Size.Width) / 2, (Size.Height) / 2);
+                    var random = new Random();
+                    var last = DateTime.Now;
+                    var x = random.Next(0, 10) % 2 == 0 ? pos.X + random.Next(0, (Size.Width) / 3) : pos.X - random.Next(0, (Size.Width) / 3);
+                    var y = random.Next(0, 10) % 2 == 0 ? pos.Y + random.Next(0, (Size.Height) / 3) : pos.Y - random.Next(0, (Size.Height) / 3);
+                    Cursor.Position = new Point(x,y);
+                    last = DateTime.Now;
+                    button2.PerformClick();
+                    mouseOps.DoMouseClick();
+                }
 
-                //MouseEventArgs eventArgs = new MouseEventArgs(MouseButtons.Right, 1, x, y, 0);
-                button2.PerformClick();
-                mouseOps.DoMouseClick();
-                
                 if (!needEscape)
                 {
+                    await Task.Delay(500);
                     _moveCursor();
                 }
                 else
@@ -40,7 +42,7 @@ namespace WinFormsCursor
                 }
             };
             InitializeComponent();
-            button1.Size = new Size(300, 50);
+            button2.BackColor = Color.Transparent;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -50,7 +52,7 @@ namespace WinFormsCursor
                 needEscape = false;
                 isMoving = true;
                 _moveCursor();
-                button1.Text = "durdurmak için fareyi clickle...";
+                button1.Text = "durdurmak için fareyi double clickle...";
             }
         }
 
@@ -58,15 +60,21 @@ namespace WinFormsCursor
         {
             if (isMoving)
             {
-                needEscape = MessageBox.Show("Durayım mı?", "Mola?",
+                hesitating = true;
+                needEscape = MessageBox.Show("Durayım mı?", "Sigara içildi mi?",
                                     MessageBoxButtons.YesNo,
                                     MessageBoxIcon.Question) == DialogResult.Yes;
+                if (needEscape)
+                {
+                    button1.Text = "Tekrar başla :)";
+                }
+                hesitating = false;
             }
         }
 
         private void Form1_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show("form click");
+            richTextBox1.Text = $"click time => {DateTime.Now.ToString("HH:mm:ss")}";
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -97,6 +105,16 @@ namespace WinFormsCursor
         private void button2_Click(object sender, EventArgs e)
         {
             //MessageBox.Show("click");
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
